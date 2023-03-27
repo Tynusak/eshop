@@ -2,10 +2,12 @@ import './Article.css';
 import { Heart } from '../buttons/Heart/Heart';
 import { AddToCart } from '../buttons/AddToCart/AddToCart';
 
-export const Article = ({ title, onClick }) => {
+export const Article = ({ title, showModal }) => {
   return (
-    <div className="articleCard" onClick={onClick}>
-      <h3>{title}</h3>
+    <div className="articleCard">
+      <h3 onClick={showModal} className="articleCard__title">
+        {title}
+      </h3>
       <div className="articleCard__buttons">
         <Heart />
         <AddToCart />

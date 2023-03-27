@@ -1,24 +1,23 @@
 import { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
 import { Heart } from '../buttons/Heart/Heart';
 import { AddToCart } from '../buttons/AddToCart/AddToCart';
 
-export const ModalWindow = ({ children, isOpen }) => {
+export const ModalWindow = ({ children, isOpen, id }) => {
   const [article, setArticle] = useState();
   const [errorMessage, setErrorMessage] = useState();
 
-  const { id } = useParams();
+  console.log(id, 'a');
 
-  const loadArticle = async () => {
+  const loadArticle = async (id) => {
     try {
+      console.log(id, 'x');
       const response = await axios.get(
-        ` https://techcrunch.com/wp-json/wp/v2/posts/${id}`,
+        `https://techcrunch.com/wp-json/wp/v2/posts/${id}`,
       );
 
-      setArticle(article);
-      console.log(article);
+      setArticle(response.data);
     } catch (error) {
       setErrorMessage(error.message);
       console.log(errorMessage);
@@ -26,20 +25,28 @@ export const ModalWindow = ({ children, isOpen }) => {
   };
 
   useEffect(() => {
-    loadArticle();
-  }, []);
+    loadArticle(id);
+  }, [id]);
 
   return (
     <Modal isOpen={isOpen}>
-      <h3>Title</h3>
-      <h4>Author</h4>
-      <p>Date</p>
-      <p>Link</p>
-      <p>Price</p>
-      <div>
-        <Heart />
-        <AddToCart />
-      </div>
+      {!article ? (
+        <p>Loading..</p>
+      ) : (
+        <>
+          {' '}
+          <h3>{article?.title?.rendered}</h3>
+          <h4>Written by: {article.author}</h4>
+          <p>Date:{article.date}</p>
+          <a href={article.link}>Go to article</a>
+          <p>Price: {article.id} CZK</p>
+          <div>
+            <Heart />
+            <AddToCart />
+          </div>
+        </>
+      )}
+
       {children}
     </Modal>
   );

@@ -4,7 +4,8 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 export const AddToCart = () => {
   return (
     <button className="articleCard__button--plus">
-      <FontAwesomeIcon icon={faPlus} size="2xl" />
+      <FontAwesomeIcon icon={faPlus} size="2xl" className="icon" />
+      <text className="wide">Přidat do košíku</text>
     </button>
   );
 };

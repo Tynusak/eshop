@@ -5,13 +5,20 @@ import './Heart.css';
 
 export const Heart = () => {
   const [tagged, setTagged] = useState(false);
+  const handleTag = () => {
+    setTagged(!tagged);
+  };
+
   return (
-    <button className="articleCard__button">
+    <button className="articleCard__button" onClick={handleTag}>
       <FontAwesomeIcon
         icon={faHeart}
-        className={!tagged ? 'empty' : ''}
+        className={tagged ? 'tagged icon' : 'icon'}
         size="2xl"
       />
+      <text className="wide">
+        {tagged ? 'Odebrat z oblíbených' : 'Přidat do oblíbených'}
+      </text>
     </button>
   );
 };

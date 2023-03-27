@@ -1,8 +1,27 @@
 .articleCard__button {
   background-color: white;
-  padding: 0.3rem;
   border: none;
 }
-.empty {
+.articleCard__button:hover,
+.articleCard__button:active {
+  color: blue;
+}
+
+.icon {
+  display: block;
+}
+.tagged {
   color: rgb(183, 177, 177);
+}
+.wide {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .icon {
+    display: none;
+  }
+  .wide {
+    display: inline-block;
+  }
 }
