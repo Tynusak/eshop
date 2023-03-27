@@ -11,7 +11,7 @@ function App() {
   const [errorMessage, setErrorMessage] = useState();
   const [openModal, setOpenModal] = useState(false);
   const [id, setId] = useState('');
-  const [favourite, setFavourite] = useState(false);
+  const [favourite, setFavourite] = useState(false); //stav pro tlačítko "Oblíbené", prozatím řešeno pouze v komponentě Heart
 
   const nextArticles = () => {
     const newPage = page + 1;
@@ -22,7 +22,6 @@ function App() {
       const response = await axios.get(
         `https://techcrunch.com/wp-json/wp/v2/posts?per_page=9&page=${page}&context=embed`,
       );
-
       setData(response.data);
     } catch (error) {
       setErrorMessage(error.message);
@@ -34,24 +33,18 @@ function App() {
     loadData();
   }, [page]);
 
-  // const handleId = (index) => {
-  //   const allData = { ...data };
-  //   const newID = allData[index].id;
-  //   setId(newID);
-  // };
-
   const openModalWindow = (index, newId) => {
     setOpenModal(true);
-    console.log(index);
     const newData = [...data];
     newId = newData[index].id;
     setId(newId);
-    console.log(id);
   };
 
   const closeModalWindow = () => {
     setOpenModal(false);
   };
+
+  //funkce pro ovládání stvu tlačítka "Oblíbené", zatím nepoužitá
 
   const handleFavourite = () => {
     setFavourite(!favourite);
@@ -73,7 +66,6 @@ function App() {
                 <Article
                   title={item.title.rendered}
                   key={item.id}
-                  index={index}
                   showModal={() => openModalWindow(index, item.id)}
                 />
               ))}
