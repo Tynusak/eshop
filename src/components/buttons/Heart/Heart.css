@@ -1,0 +1,8 @@
+.articleCard__button {
+  background-color: white;
+  padding: 0.3rem;
+  border: none;
+}
+.empty {
+  color: rgb(183, 177, 177);
+}
